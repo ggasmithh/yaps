@@ -1,4 +1,4 @@
-# YAPS (Yet another pixel sorter)
+# YAPS (yet another pixel sorter)
 
 ## what?
 Its just another pixel sorter, nothing super special functionality-wise. It won't
