@@ -18,6 +18,8 @@ def image_handler(image):
 
 def video_handler(video):
 
+    print("---PIXEL SORTING VIDEO---")
+
     #make some temporary folders
     if not os.path.exists("temp/input"):
         os.makedirs("temp/input")
@@ -26,11 +28,11 @@ def video_handler(video):
         os.makedirs("temp/output")
 
     #convert the given video to a set of frames, store them in a temp input directory
-    print("Converting video to frames. . . .")
+    print("Converting video to frames. . .", end = "")
     os.system("ffmpeg -i {} -r 30 temp/input/frame_%05d.jpeg >> /dev/null 2>&1".format(video))
+    print("Done!")
 
-
-    print("Sorting frames. . . .")
+    print("Sorting frames. . . ")
 
     #I'm going to be using these values potentially thousands of times. It looks
     #hella amateur but it's better this way.
@@ -45,7 +47,7 @@ def video_handler(video):
         #update progress every 5%
         if current_progress % 5 == 0:
             print(str(current_progress) + '% complete', end="\r")
-        
+            
         #open the jpeg of the frame, sort it, and store it as sorted_frame
         sorted_frame = sort_image(Image.open("temp/input/" + file))
 
@@ -53,12 +55,15 @@ def video_handler(video):
         sorted_frame.save("temp/output/" + file)
 
         i += 1
+
+    print("Done!")
     
-    print("Converting sorted frames to video. . . .")
+    print("Converting sorted frames to video. . . ", end = "")
     #convert the images from the temporary output directory to a video
     os.system("ffmpeg -framerate 30 -i temp/output/frame_%05d.jpeg output.mp4 >> /dev/null 2>&1")
+    print("Done!")
 
-    print("Cleaning up. . . .")
+    print("Cleaning up. . . ", end = "")
     #finally, delete our temporary folder
     shutil.rmtree("temp")
 
