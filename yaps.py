@@ -1,19 +1,29 @@
+import argparse
 import os
 import random
 import shutil
-from sys import argv
 
 from PIL import Image
-
 
 IMG_FORMATS = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.bmp']
 VID_FORMATS = ['.mp4']
 
+parser = argparse.ArgumentParser(description="pixel sort an image or video")
+parser.add_argument("input", help = "input file (must be image or .mp4 video)")
+INPUT = parser.parse_args().input
+
+#os.path.split() splits the full path into everything before the last "/" of the
+#filepath, and everything after it (i.e. the filename). split(".") splits the
+#filename into everything before the period (the name itself) and everything
+#after the period (the extension)
+OUTPUT = os.path.split(INPUT)[1].split(".")[0] + "_output"
 
 def image_handler(image):
 
+    print("---PIXEL SORTING IMAGE---")
     image_new = sort_image(image)
-    image_new.save("output.png")
+    image_new.save("{}.png".format(OUTPUT))
+    print("Done!")
 
 
 def video_handler(video):
@@ -60,7 +70,8 @@ def video_handler(video):
     
     print("Converting sorted frames to video. . . ", end = "")
     #convert the images from the temporary output directory to a video
-    os.system("ffmpeg -framerate 30 -i temp/output/frame_%05d.jpeg output.mp4 >> /dev/null 2>&1")
+    os.system("ffmpeg -framerate 30 -i temp/output/frame_%05d.jpeg {}.mp4 \
+    >> /dev/null 2>&1".format(OUTPUT))
     print("Done!")
 
     print("Cleaning up. . . ", end = "")
@@ -122,13 +133,13 @@ def sort_image(im):
 
 def main():
     #Read image or video
-    if os.path.isfile(argv[1]):
+    if os.path.isfile(INPUT):
 
-        file_extension = os.path.splitext(argv[1])[1].lower()
+        file_extension = os.path.splitext(INPUT)[1].lower()
         if file_extension in IMG_FORMATS:
-            image_handler(Image.open(argv[1]))
+            image_handler(Image.open(INPUT))
 
         elif file_extension in VID_FORMATS:
-            video_handler(argv[1])
+            video_handler(INPUT)
 
 main()

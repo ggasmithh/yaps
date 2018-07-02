@@ -1,10 +1,15 @@
 # YAPS (yet another pixel sorter)
 
 ## what?
-It's just another pixel sorter, nothing super special functionality-wise. It won't
-even tell you how to use it if you pass it something like -h/--help. The only
-argument it takes is an image (.jpg, .png, .tif(f), .gif, or .bmp) or a video 
-(.mp4), and it always outputs to output.png (or output.mp4). 
+It's just another pixel sorter, nothing super special functionality-wise. 
+
+~~It won't even tell you how to use it if you pass it something like -h/--help.~~ yaps now has help information! Just invoke it incorrectly to find out what the super
+secret flag for _help_ is. 
+
+The only argument it takes is an image (.jpg, .png, 
+.tif(f), .gif, or .bmp) or a video (.mp4)~~, and it always outputs to 
+output.png (or output.mp4)~~. yaps now creates a filename based on your input
+filename! yay!
 
 It's reasonably fast (although I think using numpy would be faster) and it can make some pretty pictures (and videos).
 
