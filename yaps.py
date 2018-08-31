@@ -1,3 +1,7 @@
+#TODO: MAKE AN OPTION TO MAKE A TIMELAPSE OF THE IMAGE BEING SORTED.
+#AFTER EACH ROW IS SORTED, SAVE A FRAME, AT THE END USE FFMPEG TO CREATE
+#A VIDEO
+
 import argparse
 import os
 import random
@@ -26,27 +30,49 @@ def image_handler(image):
     print("Done!")
 
 
-def video_handler(video):
+def create_temp_folders(input_path, output_path):
+    #make some temporary folders
+    if not os.path.exists(input_path):
+        os.makedirs(input_path)
+    
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
+
+def video_to_frames(input_path, video):
+    #convert the given video to a set of frames, store them in a temp input directory
+    print("Converting video to frames. . .", end = "")
+    os.system("ffmpeg -i {} -r 30 {}frame_%05d.jpeg >> /dev/null 2>&1".format(input_path, video))
+    print("Done!")
+
+
+def frames_to_video():
+    print("Converting sorted frames to video. . . ", end = "")
+    #convert the images from the temporary output directory to a video
+    os.system("ffmpeg -framerate 30 -i {}frame_%05d.jpeg {}.mp4 \
+    >> /dev/null 2>&1".format(output_path, OUTPUT))
+    print("Done!")
+
+
+def clean_temp():
+    print("Cleaning up. . . ", end = "")
+    #finally, delete our temporary folders
+    shutil.rmtree(input_path)
+    shutil.rmtree(output_path)
+
+
+def video_handler(video, input_path, output_path):
 
     print("---PIXEL SORTING VIDEO---")
 
-    #make some temporary folders
-    if not os.path.exists("temp/input"):
-        os.makedirs("temp/input")
-    
-    if not os.path.exists("temp/output"):
-        os.makedirs("temp/output")
-
-    #convert the given video to a set of frames, store them in a temp input directory
-    print("Converting video to frames. . .", end = "")
-    os.system("ffmpeg -i {} -r 30 temp/input/frame_%05d.jpeg >> /dev/null 2>&1".format(video))
-    print("Done!")
+    create_temp_folders()
+    video_to_frames(video)
 
     print("Sorting frames. . . ")
 
     #I'm going to be using these values potentially thousands of times. It looks
     #hella amateur but it's better this way.
-    file_list = os.listdir("temp/input")
+    file_list = os.listdir(input_path)
     num_files = len(file_list)
     i = 0
 
@@ -59,33 +85,22 @@ def video_handler(video):
             print(str(current_progress) + '% complete', end="\r")
             
         #open the jpeg of the frame, sort it, and store it as sorted_frame
-        sorted_frame = sort_image(Image.open("temp/input/" + file))
+        sorted_frame = sort_image(Image.open(input_path + file))
 
         #save the sorted frame to a temporary output directory
-        sorted_frame.save("temp/output/" + file)
+        sorted_frame.save(output_path + file)
 
         i += 1
 
     print("Done!")
-    
-    print("Converting sorted frames to video. . . ", end = "")
-    #convert the images from the temporary output directory to a video
-    os.system("ffmpeg -framerate 30 -i temp/output/frame_%05d.jpeg {}.mp4 \
-    >> /dev/null 2>&1".format(OUTPUT))
-    print("Done!")
 
-    print("Cleaning up. . . ", end = "")
-    #finally, delete our temporary folder
-    shutil.rmtree("temp")
-
-    print("Done!")
+    frames_to_video()
 
 
 #Accepts an unsorted Image object, returns a sorted Image object
 def sort_image(im):
 
     im_width, im_height = im.size
-
 
     #Splitting the image into its respective bands, i.e. Red, Green,
     #and Blue for RGB
@@ -140,6 +155,6 @@ def main():
             image_handler(Image.open(INPUT))
 
         elif file_extension in VID_FORMATS:
-            video_handler(INPUT)
+            video_handler(INPUT, "temp/input/", "temp/output/")
 
 main()
