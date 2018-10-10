@@ -2,14 +2,12 @@
 
 
 ## what?
-It's just another pixel sorter, nothing super special functionality-wise. 
+~~It's just another pixel sorter, nothing super special functionality-wise.~~
 
-The only argument it takes is an image (.jpg, .png, 
-.tif(f), .gif, or .bmp).
+yaps now does some pretty cool stuff!
 
-It's reasonably fast ~~(although I think using numpy would be faster)~~ and it can make some pretty pictures (and videos).
-
-yaps now uses numpy!
+Pixels in the image are sorted by luma value, but only within regions defined by a Sobel edge-detection algorithm.
+This has some pretty neat results.
 
 
 ## why?
@@ -19,11 +17,15 @@ I wanted to write something kinda neat but very simple. Something that I could
 both understand at first glance and write good comments for.
 
 
-## dependencies
-Dependencies for yaps can now be found in requirements.txt
-
 ## open issues
-I removed support for videos, but I'd like to bring them back in such a way that every frame does not have to be written to disk.
-In order to do that, though, I need to get my method for sorting Images cemented, which brings me to my next point.
+yaps is now EXTREMELY slow and memory-hungry because I decided to take everything OO, and to make every pixel its own object (mistake).
 
-Pixel sorting is a weird problem. Sorting is more of a 1D concept, when most colorspaces are way farther up the ladder, dimensionally speaking (RGB and HSV are 3D, CYMK is 4D, etc). I feel like a good metric for the "sorted-ness" of an image is how close the color of one pixel is to its neighbors. Perhaps a pathfinding algorithm would be suitable?
+This will be fixed in the next commit, however. The ease of readability and extensibility that comes with each pixel being an object isn't worth the performance hit (yes, it's that bad). I think a solution to this may be to spread out the pixels' attributes into several numpy ndarrays. This will let me use numpy's optimized matrix math, rather than my own.
+
+I'm also working on replacing for loops with the much faster standard library functions (which are implemented in C) where I can, and flattening them where I cannot.
+
+
+## usage
+```
+yaps.py foo.{'.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.bmp'}
+```
