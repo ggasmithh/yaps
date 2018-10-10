@@ -1,7 +1,7 @@
 
 
 # yaps (yet another pixel sorter)
-[[https://github.com/ggasmithh/yaps/blob/master/example/Hopetoun_falls_output.png|alt=yaps, because we needed another one.]]
+![yaps, because we needed another pixel sorter.](https://github.com/ggasmithh/yaps/blob/master/example/Hopetoun_falls_output.png)
 
 ## what?
 ~~It's just another pixel sorter, nothing super special functionality-wise.~~
