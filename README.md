@@ -16,11 +16,7 @@ both understand at first glance and write good comments for.
 
 
 ## open issues
-~~yaps is now EXTREMELY slow and memory-hungry because I decided to take everything OO, and to make every pixel its own object (mistake).
-
-This will be fixed in the next commit, however. The ease of readability and extensibility that comes with each pixel being an object isn't worth the performance hit (yes, it's that bad). I think a solution to this may be to spread out the pixels' attributes into several numpy ndarrays. This will let me use numpy's optimized matrix math, rather than my own.
-
-I'm also working on replacing for loops with the much faster standard library functions (which are implemented in C) where I can, and flattening them where I cannot.~~
+~~yaps is now EXTREMELY slow and memory-hungry because I decided to take everything OO, and to make every pixel its own object (mistake).~~
 
 This has been fixed! The latest commit now stores pixel attributes in several numpy ndarrays, and has far less for loops (there are still some to flatten, though).
 
