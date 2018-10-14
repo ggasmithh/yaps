@@ -24,25 +24,25 @@ Check out the results!
 
 ### low resolution image sort
 #### old
-![old version](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time0.png)
+![old version: 1.003](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time0.png)
 
 #### new
-![new version](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time0.png)
+![new version: 0.627 seconds](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time0.png)
 
 
 ### medium resolution image sort
 #### old
-![old version](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time1.png)
+![old version: 491.088](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time1.png)
 
 #### new
-![new version](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time1.png)
+![new version: 185.971 seconds](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time1.png)
 
 ### high resolution image sort
 #### old
-![old version](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time2.png)
+![old version: 897.586](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time2.png)
 
 #### new
-![new version](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time2.png)
+![new version: 341.062 seconds](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time2.png)
 
 
 
