@@ -23,26 +23,26 @@ This has been fixed! The latest commit now stores pixel attributes in several nu
 Check out the results!
 
 ### low resolution image sort
-#### old
-![old version: 1.003](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time0.png)
+#### old: 1.003 seconds
+![old version](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time0.png)
 
-#### new
-![new version: 0.627 seconds](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time0.png)
+#### new: 0.627 seconds
+![new version](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time0.png)
 
 
 ### medium resolution image sort
-#### old
-![old version: 491.088](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time1.png)
+#### old: 491.088 seconds
+![old version](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time1.png)
 
-#### new
-![new version: 185.971 seconds](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time1.png)
+#### new: 185.971 seconds
+![new version](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time1.png)
 
 ### high resolution image sort
-#### old
-![old version: 897.586](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time2.png)
+#### old: 897.586 seconds
+![old version](https://github.com/ggasmithh/yaps/blob/master/img/old/old_time2.png)
 
-#### new
-![new version: 341.062 seconds](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time2.png)
+#### new: 341.062 seconds
+![new version](https://github.com/ggasmithh/yaps/blob/master/img/new/new_time2.png)
 
 
 
