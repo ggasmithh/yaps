@@ -7,8 +7,6 @@ import imageio
 from scipy import ndimage
 from tqdm import tqdm
 
-import time
-
 IMG_FORMATS = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.bmp']
 
 parser = argparse.ArgumentParser(description="pixel sort an image or video")
@@ -153,16 +151,8 @@ def main():
         file_extension = os.path.splitext(INPUT)[1].lower()
         if file_extension in IMG_FORMATS:
 
-            start = time.time()
-
             input_image = Image(imageio.imread(INPUT))
-
             input_image.sort()
-
-            end = time.time()
-
-            print("Total elapsed time:", round(end - start, 3), "seconds.")
-
             input_image.save_to_disk(OUTPUT)
 
         
