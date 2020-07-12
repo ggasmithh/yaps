@@ -39,7 +39,7 @@ def get_luma_values(image_data):
     luma = image_data.tolist()
 
     # this could totally be flattened into some sort of nested list comprehension
-    for i in tqdm(range(0, len(luma))):
+    for i in range(0, len(luma)):
         for j in range(0, len(luma[i])):
 
             luma[i][j] = sum([x * y for x, y in zip(luma[i][j], [0.2126, 0.7152, 0.0722])])
@@ -62,7 +62,7 @@ def get_sobel_coordinates(image_data, width, height):
 
     coordinates = numpy.zeros((width, height), dtype=numpy.bool)
 
-    for i in tqdm(range(0, width)):
+    for i in range(0, width):
         for j in range(0, height):
             if numpy.any(mag[i, j] > 128):
                 coordinates[i, j] = True
@@ -77,7 +77,7 @@ def get_segments(sobel_coordinates, width, height):
     current_segment = [[0, 0]]
 
     print("\nGenerating segments. . .")
-    for i in tqdm(range(0, width)):
+    for i in range(0, width):
         for j in range(0, height):
 
             #if the Pixel doesn't belong in this Segment, push the old one and start a new one
@@ -100,7 +100,7 @@ def sort(image_data, luma, sobel_coordinates, segments):
     temp_image_data = image_data
 
     print("\nSorting segments. . .")
-    for segment in tqdm(segments):
+    for segment in segments:
 
         segment_start = segment[0]
 
