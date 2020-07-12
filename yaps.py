@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 IMG_FORMATS = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.bmp']
 
-parser = argparse.ArgumentParser(description="pixel sort an image or video")
+parser = argparse.ArgumentParser(description="pixel sort an image")
 parser.add_argument("input", help = "input file (must be an image)")
 INPUT = parser.parse_args().input
 
