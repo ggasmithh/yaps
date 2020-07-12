@@ -5,7 +5,6 @@ import scipy
 import imageio
 
 from scipy import ndimage
-from tqdm import tqdm
 
 IMG_FORMATS = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.gif', '.bmp']
 
