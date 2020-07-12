@@ -3,6 +3,7 @@ import os
 import numpy
 import scipy
 import imageio
+import time
 
 from scipy import ndimage
 
@@ -138,11 +139,15 @@ def main():
             image_data = imageio.imread(INPUT)
             image_width, image_height, *rest = image_data.shape
 
+            start_time = time.time() # I only care about measuring performance of this chunk.
+
             luma_values = get_luma_values(image_data)
             sobel_coordinates = get_sobel_coordinates(image_data, image_width, image_height)
             segments = get_segments(sobel_coordinates, image_width, image_height)
 
             output_image_data = sort(image_data, luma_values, sobel_coordinates, segments)
+
+            print("--- %s seconds ---" % (time.time() - start_time))
         
             save_to_disk(output_image_data, OUTPUT)
 
