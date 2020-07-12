@@ -34,8 +34,6 @@ def __init__(self, data):
 
 def get_luma_values(image_data):
 
-    print("\nGenerating luma values. . .")
-
     luma = image_data.tolist()
 
     # this could totally be flattened into some sort of nested list comprehension
@@ -48,8 +46,6 @@ def get_luma_values(image_data):
     return numpy.asarray(luma)
 
 def get_sobel_coordinates(image_data, width, height):
-
-    print("\nGetting sobel coordinates")
 
     temp_image_data = image_data.astype('int32')
 
@@ -76,7 +72,6 @@ def get_segments(sobel_coordinates, width, height):
     #start the first segment with the first pixel
     current_segment = [[0, 0]]
 
-    print("\nGenerating segments. . .")
     for i in range(0, width):
         for j in range(0, height):
 
@@ -99,7 +94,6 @@ def sort(image_data, luma, sobel_coordinates, segments):
 
     temp_image_data = image_data
 
-    print("\nSorting segments. . .")
     for segment in segments:
 
         segment_start = segment[0]
