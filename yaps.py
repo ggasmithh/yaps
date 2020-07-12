@@ -3,7 +3,7 @@ import os
 import numpy
 import scipy
 import imageio
-import time
+import concurrent.futures
 
 from scipy import ndimage
 
@@ -133,15 +133,13 @@ def main():
             image_data = imageio.imread(INPUT)
             image_width, image_height, *rest = image_data.shape
 
-            start_time = time.time() # I only care about measuring performance of this chunk.
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                luma_val_future = executor.submit(get_luma_values, image_data)
+                sobel_coords_future = executor.submit(get_sobel_coordinates, image_data, image_width, image_height)
+                sobel_coordinates = sobel_coords_future.result()
+                segments_future = executor.submit(get_segments, sobel_coordinates, image_width, image_height)
 
-            luma_values = get_luma_values(image_data)
-            sobel_coordinates = get_sobel_coordinates(image_data, image_width, image_height)
-            segments = get_segments(sobel_coordinates, image_width, image_height)
-
-            output_image_data = sort(image_data, luma_values, sobel_coordinates, segments)
-
-            print("--- %s seconds ---" % (time.time() - start_time))
+                output_image_data = sort(image_data, luma_val_future.result(), sobel_coordinates, segments_future.result())
         
             save_to_disk(output_image_data, OUTPUT)
 
